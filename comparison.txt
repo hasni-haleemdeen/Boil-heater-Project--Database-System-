@@ -1,0 +1,6 @@
+SELECT w1898945_custSurname,w1898945_custEmail,w1898945_paymentRefNo,w1898945_paymentAmount 
+FROM w1898945_customer 
+JOIN w1898945_Oneoff_payment
+ON w1898945_customer.w1898945_custNo = w1898945_oneoff_payment.w1898945_custNo 
+WHERE w1898945_custSurname 
+LIKE 'Pat%' AND w1898945_paymentAmount <= 80;

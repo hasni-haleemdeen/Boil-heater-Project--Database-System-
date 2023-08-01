@@ -1,0 +1,50 @@
+CREATE TABLE w1898945_Customer
+(
+w1898945_custNo              INT,
+w1898945_custName            VARCHAR (40) NOT NULL,
+w1898945_custSurname         VARCHAR (80) NOT NULL,
+w1898945_custEmail           VARCHAR (80) NOT NULL,
+w1898945_custMobNo           TEGER NOT NULL,
+CONSTRAINT                   c_cNo_pk PRIMARY KEY(w1898945_custNo)
+);
+INSERT INTO w1898945_customer (w1898945_custNo,w1898945_custName,w1898945_custSurname,w1898945_custEmail,w1898945_custMobNo)
+VALUES('01','deverakonda','vijay','thedeverakonda@gmail.com','0923451004'),
+      ('02','peter','parker','ptrparker@gmail.com','0856732879'),
+      ('03','hasni','haleem','hashal@gmail.com','0789045123'),
+      ('04','arjun','reddy','arjunreddy17@gmail.com','0913458944'),
+      ('05','shreya','goshal','shregoshal145@gmail.com','0768901123'),
+      ('06','ar','rahman','arrahman@gmail.com','0873547208'),
+      ('07','selena','gomez','selgomez95@gmail.com','0987564356'),
+      ('08','ayaan','thariq','thariqayaan02@gmail.com','0112347802'),
+      ('09','amaani','raazil','raazilamaani@gmail.com','0745670987'),
+      ('10','omar','abbas','omarabbas78@gmail.com','0935640077');
+      
+CREATE TABLE w1898945_Oneoff_Payment
+(
+   w1898945_paymentRefNo          INT,
+   w1898945_paymentDate           date,
+   w1898945_paymentAmount         DECIMAL(7,2),
+   w1898945_custNo                INT NOT NULL,
+   constraint                     o_op_pk PRIMARY KEY (w1898945_paymentRefNo),
+   constraint                     c_cNO_fk FOREIGN KEY (w1898945_custNo)
+   references                     w1898945_customer(w1898945_custNo)
+    );
+
+INSERT INTO 
+w1898945_oneoff_payment(w1898945_paymentRefNo,w1898945_paymentDate,w1898945_paymentAmount,w1898945_custNo)
+VALUES ('101','2021-10-21','57.00','01'),
+       ('102','2021-12-06','89.00','02'),
+       ('103','2022-05-05','44.00','03'),
+       ('104','2022-07-09','77.00','04'),
+       ('105','2022-02-14','36.00','05'),
+       ('106','2022-10-19','69.00','06'),
+       ('107','2022-04-25','99.00','07'),
+       ('108','2022-12-13','45.00','08'),
+       ('109','2022-09-05','53.00','09'),
+       ('110','2022-03-23','83.00','10');
+SELECT w1898945_custSurname,w1898945_custEmail,w1898945_paymentRefNo,w1898945_paymentAmount
+FROM w1898945_customer JOIN w1898945_oneoff_payment
+ON w1898945_customer.w1898945_custNo = w1898945_oneoff_payment.w1898945_custNo
+WHERE w1898945_custSurname LIKE 'pat%' AND w1898945_paymentAmount <= 80;
+
+
